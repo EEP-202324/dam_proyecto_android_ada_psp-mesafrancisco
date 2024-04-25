@@ -1,7 +1,9 @@
 package com.example.persona;
 
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
-record Persona(@Id Long id,String nombre, String apellido, int edad) {
+@Entity
+record Persona(@Id Long id, String nombre, String apellido, int edad) {
 }
 

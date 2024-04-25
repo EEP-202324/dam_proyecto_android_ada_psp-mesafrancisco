@@ -1,7 +1,10 @@
 package com.example.persona;
-
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
 
-public interface PersonaRepository extends CrudRepository<Persona,Long>{
-
+@Repository
+public interface PersonaRepository extends CrudRepository<Persona, Long>, PagingAndSortingRepository<Persona, Long> {
+	
 }

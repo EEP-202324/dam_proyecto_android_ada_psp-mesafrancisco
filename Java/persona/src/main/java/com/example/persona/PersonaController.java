@@ -1,8 +1,13 @@
 package com.example.persona;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,22 +17,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-
 @RestController
 @RequestMapping("/personas")
 public class PersonaController {
-	
+
 	private final PersonaRepository personaRepository;
 
 	private PersonaController(PersonaRepository personaRepository) {
 		this.personaRepository = personaRepository;
 	}
+//	frases bonitas y fotos de marte 
 
-	// Apaño temporal para poder llamar desde Android, ya lo haremos bien
 	@GetMapping
-	private ResponseEntity<String> findAll() {
-		Iterable<Persona> cashCardIterable = personaRepository.findAll();
-		return ResponseEntity.ok(cashCardIterable.toString());
+	private ResponseEntity<List<Persona>> findAll(Pageable pageable) {
+		Page<Persona> page = personaRepository.findAll(PageRequest.of(pageable.getPageNumber(), // 0
+				pageable.getPageSize(), // 20
+				pageable.getSortOr(Sort.by(Sort.Direction.ASC, "nombre"))));
+		return ResponseEntity.ok(page.getContent());
 	}
 
 	@GetMapping("/{requestedId}")
