@@ -1,4 +1,4 @@
-package com.example.persona;
+package com.example.persona.controller;
 
 import java.net.URI;
 import java.util.List;
@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import com.example.persona.entity.Persona;
+import com.example.persona.repository.PersonaRepository;
 
 @RestController
 @RequestMapping("/personas")
