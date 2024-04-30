@@ -40,7 +40,7 @@ public class PersonaController {
 		return ResponseEntity.ok(page.getContent());
 	}
 
-	@GetMapping("/{requestedId}")
+	@GetMapping("/{Id}")
 	private ResponseEntity<Persona> findById(@PathVariable Long requestedId) {
 		Optional<Persona> personaOptional = personaRepository.findById(requestedId);
 		if (personaOptional.isPresent()) {

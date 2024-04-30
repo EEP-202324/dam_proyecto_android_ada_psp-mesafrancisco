@@ -40,7 +40,7 @@ public class EscuelaController {
 		return ResponseEntity.ok(page.getContent());
 	}
 
-	@GetMapping("/{requestedId}")
+	@GetMapping("/{Id}")
 	private ResponseEntity<Escuela> findById(@PathVariable Long requestedId) {
 		Optional<Escuela> escuelaOptional = escuelaRepository.findById(requestedId);
 		if (escuelaOptional.isPresent()) {
