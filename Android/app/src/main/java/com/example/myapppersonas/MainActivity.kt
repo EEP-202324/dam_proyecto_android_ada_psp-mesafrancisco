@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.myapppersonas.network.Persona
+import com.example.myapppersonas.model.Persona
 import com.example.myapppersonas.ui.theme.MyAppPersonasTheme
 
 class MainActivity : ComponentActivity() {
@@ -42,7 +42,7 @@ fun AddPersonaScreen() {
     var apellido by remember { mutableStateOf("") }
     var edad by remember { mutableStateOf("") }
 
-    // Lista temporal de personas para simular datos
+    // Lista mutable de personas para almacenar las personas agregadas
     val personas = remember { mutableStateListOf<Persona>() }
 
     Column(
@@ -87,8 +87,8 @@ fun AddPersonaScreen() {
         ) {
             Button(
                 onClick = {
-                    // Agregar persona a la lista (esto sería reemplazado por la llamada a la API)
-                    // personas.add(Persona(nombre, apellido, edad.toInt()))
+                    // Agregar persona a la lista
+                    personas.add(Persona(nombre, apellido, edad.toInt()))
 
                     // Limpiar campos después de agregar persona
                     nombre = ""
@@ -102,13 +102,17 @@ fun AddPersonaScreen() {
             Button(
                 onClick = {
                     // Mostrar personas (esto podría ser reemplazado por la navegación a otra pantalla)
-                    //personas.forEach { persona ->
-                   //     println("Nombre: ${persona.nombre}, Apellido: ${persona.apellido}, Edad: ${persona.edad}")
-                   // }
+                    personas.forEach {
+                    }
                 }
             ) {
                 Text("Mostrar Personas")
             }
+        }
+
+        // Mostrar la lista de personas agregadas
+        personas.forEach { persona ->
+            Text("Nombre: ${persona.nombre}, Apellido: ${persona.apellido}, Edad: ${persona.edad}")
         }
     }
 }
