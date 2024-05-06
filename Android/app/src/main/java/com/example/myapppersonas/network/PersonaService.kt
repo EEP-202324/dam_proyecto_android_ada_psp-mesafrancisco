@@ -6,6 +6,7 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -14,10 +15,10 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 
 private const val BASE_URL =
-    "http://10.0.2.2:8080"
+    "http://10.0.2.2:8080/"
 //        "http://10.0.2.2:8080" // esta es la IP del localhost del ordenador
 private val retrofit = Retrofit.Builder()
-    .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+    .addConverterFactory(GsonConverterFactory.create())
     .baseUrl(BASE_URL)
     .build()
 

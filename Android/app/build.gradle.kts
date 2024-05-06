@@ -73,4 +73,9 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     // Kotlin serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+
+
+
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
 }
