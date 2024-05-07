@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.myapppersonas.model.Persona
-import com.example.myapppersonas.repository.PersonaRepository
+import com.example.myapppersonas.ui.theme.App
 import com.example.myapppersonas.ui.theme.MyAppPersonasTheme
 
 class MainActivity : ComponentActivity() {
@@ -30,100 +30,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyAppPersonasTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    AddPersonaScreen()
+                    App()
                 }
             }
         }
-    }
-}
-
-@Composable
-fun AddPersonaScreen() {
-    var nombre by remember { mutableStateOf("") }
-    var apellido by remember { mutableStateOf("") }
-    var edad by remember { mutableStateOf("") }
-
-    // Lista mutable de personas para almacenar las personas agregadas
-    val personas = remember { mutableStateListOf<Persona>() }
-
-    Column(
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "Añade tus Datos",
-            color = Color.Blue,
-            style = TextStyle(
-                fontFamily = FontFamily.Serif,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                fontStyle = FontStyle.Italic
-            ),
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-        OutlinedTextField(
-            value = nombre,
-            onValueChange = { nombre = it },
-            label = { Text("Nombre") }
-        )
-
-        OutlinedTextField(
-            value = apellido,
-            onValueChange = { apellido = it },
-            label = { Text("Apellido") }
-        )
-
-        OutlinedTextField(
-            value = edad,
-            onValueChange = { edad = it },
-            label = { Text("Edad") }
-        )
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            Button(
-                onClick = {
-                    // Agregar persona a la lista
-                    personas.add(Persona(nombre, apellido, edad.toInt()))
-
-                    // Limpiar campos después de agregar persona
-                    nombre = ""
-                    apellido = ""
-                    edad = ""
-                }
-            ) {
-                Text("Agregar Persona")
-            }
-
-            Button(
-                onClick = {
-                    // Mostrar personas (esto podría ser reemplazado por la navegación a otra pantalla)
-                    personas.forEach {
-                    }
-                }
-            ) {
-                Text("Mostrar Personas")
-            }
-        }
-
-        // Mostrar la lista de personas agregadas
-        personas.forEach { persona ->
-            Text("Nombre: ${persona.nombre}, Apellido: ${persona.apellido}, Edad: ${persona.edad}")
-        }
-    }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MyAppPersonasTheme {
-        AddPersonaScreen()
     }
 }
 
