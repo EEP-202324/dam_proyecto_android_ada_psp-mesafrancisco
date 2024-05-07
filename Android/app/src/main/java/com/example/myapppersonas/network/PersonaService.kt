@@ -16,6 +16,7 @@ import retrofit2.http.Path
 
 private const val BASE_URL =
     "http://10.0.2.2:8080/"
+
 //        "http://10.0.2.2:8080" // esta es la IP del localhost del ordenador
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(GsonConverterFactory.create())
