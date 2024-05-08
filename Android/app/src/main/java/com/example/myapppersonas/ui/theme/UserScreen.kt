@@ -26,6 +26,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.myapppersonas.model.Persona
+import com.example.myapppersonas.network.PersonaApi.retrofitService
+
+
 @Composable
 fun UserScreen(navController: NavController) {
     var nombre by remember { mutableStateOf("") }
@@ -45,9 +48,10 @@ fun UserScreen(navController: NavController) {
         Text(
             text = "Añade tus Datos",
             color = Color.Blue,
+            fontFamily = FontFamily.SansSerif,
             style = TextStyle(
                 fontFamily = FontFamily.Serif,
-                fontSize = 24.sp,
+                fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
                 fontStyle = FontStyle.Italic
             ),
@@ -77,13 +81,16 @@ fun UserScreen(navController: NavController) {
         ) {
             Button(
                 onClick = {
-                    // Agregar persona a la lista
-                    personas.add(Persona(nombre, apellido, edad.toInt()))
+                    val nuevaPersona = Persona(0 ,nombre, apellido, edad.toInt()) //Creo una nueva persona con los campos introducidos
 
-                    // Limpiar campos después de agregar persona
+                 //   recuperarPersonas()  //Añadimos la persona nueva
+
                     nombre = ""
                     apellido = ""
                     edad = ""
+
+                    // Limpiar campos después de agregar persona
+
                 }
             ) {
                 Text("Agregar Persona")
@@ -91,10 +98,8 @@ fun UserScreen(navController: NavController) {
 
             Button(
                 onClick = {
-                    // Mostrar personas (esto podría ser reemplazado por la navegación a otra pantalla)
+                    //mostrarPersonas()
                     navController.navigate(Screen.ListUser)
-                    personas.forEach {
-                    }
                 }
             ) {
                 Text("Mostrar Personas")
@@ -107,8 +112,6 @@ fun UserScreen(navController: NavController) {
         }
     }
 }
-
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {

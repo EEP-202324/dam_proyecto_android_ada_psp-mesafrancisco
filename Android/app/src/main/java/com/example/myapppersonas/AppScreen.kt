@@ -22,7 +22,8 @@ fun AppScreen(
         }
         composable(Screen.ListUser) {
             // Lógica para la lista de usuarios
-            ListUser(navController)
+
+            ListUser()
         }
     }
 }

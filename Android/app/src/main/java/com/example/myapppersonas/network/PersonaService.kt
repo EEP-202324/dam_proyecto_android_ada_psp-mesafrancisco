@@ -18,31 +18,29 @@ private const val BASE_URL =
     "http://10.0.2.2:8080/"
 
 //        "http://10.0.2.2:8080" // esta es la IP del localhost del ordenador
-private val retrofit = Retrofit.Builder()
-    .addConverterFactory(GsonConverterFactory.create())
-    .baseUrl(BASE_URL)
-    .build()
 
-interface PersonaService {
+
+interface PersonaApiService {
     @GET("personas")
     suspend fun getPersonas(): List<Persona>
-    @POST("personas")
-    suspend fun addPersona(@Body persona: Persona): Persona
 
     @PUT("personas/{id}")
     suspend fun updatePersona(@Path("id") id: Long, @Body persona: Persona): Persona
 
     @DELETE("personas/{id}")
     suspend fun deletePersona(@Path("id") id: Long): Unit
-}
-interface PersonaApiService {
+
     @POST("personas")
     suspend fun addPersona(@Body persona: Persona): Response<Void>
 }
 
 object PersonaApi {
-    val retrofitService: PersonaService by lazy {
-        retrofit.create(PersonaService::class.java)
+    val retrofitService: PersonaApiService by lazy {
+        retrofit.create(PersonaApiService::class.java)
     }
 }
 
+private val retrofit = Retrofit.Builder()
+    .addConverterFactory(GsonConverterFactory.create())
+    .baseUrl(BASE_URL)
+    .build()
