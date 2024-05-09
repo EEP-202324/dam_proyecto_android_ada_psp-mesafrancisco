@@ -6,13 +6,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.myapppersonas.model.Persona
 import com.example.myapppersonas.network.PersonaApi
 import kotlinx.coroutines.launch
 import java.io.IOException
 
 class ListaPersonaViewModel : ViewModel() {
     sealed interface PersonaUiState {
-        data class Success(val personas: String) : PersonaUiState // TODO lista de personas
+        data class Success(val personas: List<Persona>) : PersonaUiState // TODO lista de personas
         object Error : PersonaUiState
         object Loading : PersonaUiState
     }
@@ -30,7 +31,7 @@ class ListaPersonaViewModel : ViewModel() {
                 val listResult = PersonaApi.retrofitService.getPersonas()
                 Log.i("MarsViewModel","Despues de la lista");
                 personaUiState = PersonaUiState.Success(
-                    "Success: ${listResult.size} Mars photos retrieved"// TODO lista de personas
+                  listResult //"Success: ${listResult.size} Mars photos retrieved"// TODO lista de personas
                 )
             } catch (e: IOException) {
                 personaUiState = PersonaUiState.Error

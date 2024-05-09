@@ -82,9 +82,7 @@ fun UserScreen(navController: NavController) {
             Button(
                 onClick = {
                     val nuevaPersona = Persona(0 ,nombre, apellido, edad.toInt()) //Creo una nueva persona con los campos introducidos
-
                  //   recuperarPersonas()  //Añadimos la persona nueva
-
                     nombre = ""
                     apellido = ""
                     edad = ""
