@@ -88,7 +88,6 @@ fun UserScreen(navController: NavController) {
                     edad = ""
 
                     // Limpiar campos después de agregar persona
-
                 }
             ) {
                 Text("Agregar Persona")
@@ -96,7 +95,6 @@ fun UserScreen(navController: NavController) {
 
             Button(
                 onClick = {
-                    //mostrarPersonas()
                     navController.navigate(Screen.ListUser)
                 }
             ) {
