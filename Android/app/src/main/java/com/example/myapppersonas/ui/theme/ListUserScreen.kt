@@ -1,5 +1,6 @@
 package com.example.myapppersonas.ui.theme
 
+import androidx.compose.foundation.background
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.*
@@ -14,6 +15,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FloatingActionButton
@@ -71,7 +73,7 @@ fun ListUser(navController: NavController, modifier: Modifier = Modifier) {
                     .fillMaxSize(),
                 contentAlignment = Alignment.BottomStart
             ) {
-                StandardFab2()
+                StandardFab2(navController)
             }
         }
     }
@@ -97,16 +99,21 @@ fun StandardFab(navController: NavController, modifier: Modifier = Modifier) {
 
 
 @Composable
-fun StandardFab2(modifier: Modifier = Modifier) {
+fun StandardFab2(navController: NavController, modifier: Modifier = Modifier) {
     FloatingActionButton(
-        onClick = { /*TODO*/ },
+        onClick = {navController.navigate(Screen.ListEscuelas)  },
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.error
 
     ) {
-        Icon(
-            imageVector = Icons.Default.FavoriteBorder,
-            contentDescription = "Delete")
+        Row(modifier = Modifier.padding(10.dp)) {
+            Text(text = "Lista de Escuelas ")
+            Spacer(modifier = Modifier.height(8.dp))
+            Icon(
+                imageVector = Icons.Default.List,
+                contentDescription = "Add"
+            )
+        }
     }
 }
 @Composable
@@ -170,25 +177,44 @@ fun UserProfileCard(id: Int, firstName: String, lastName: String, age: Int) {
                         fontWeight = FontWeight.SemiBold,
                         style = MaterialTheme.typography.titleLarge
                     )
-
                 }
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                OutlinedButton(
-                    shape = RoundedCornerShape(8.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        contentColor = Color.Blue,
-                        containerColor = Color.White
-                    ),
-                    onClick = { /*TODO*/ }
-                ) {
-                    Text(
-                        text = "Borrar Usuario",
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        style = MaterialTheme.typography.titleLarge
-                    )
+                Row (){
+                    OutlinedButton(
+
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            contentColor = Color.Blue,
+                            containerColor = Color.Transparent
+                        ),
+                        onClick = { /*TODO*/ }
+                    ) {
+                        Text(
+                            text = "Borrar Usuario",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            style = MaterialTheme.typography.titleLarge
+                        )
+                    }
+                    Spacer(modifier = Modifier.padding(2.dp))
+                    OutlinedButton(
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            contentColor = Color.Blue,
+                            containerColor = Color.White,
+
+                        ),
+                        onClick = { /*TODO*/ }
+                    ) {
+                        Text(
+                            text = "Asignar Universidad",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            style = MaterialTheme.typography.titleLarge
+                        )
+                    }
                 }
                 Box(
                     modifier = Modifier

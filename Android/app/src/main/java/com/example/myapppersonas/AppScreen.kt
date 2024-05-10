@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.myapppersonas.ui.theme.ListEscuelas
 import com.example.myapppersonas.ui.theme.ListUser
 import com.example.myapppersonas.ui.theme.Screen
 import com.example.myapppersonas.ui.theme.UserScreen
@@ -23,6 +24,10 @@ fun AppScreen(
         composable(Screen.ListUser) {
             // Lógica para la lista de usuarios
             ListUser(navController)
+        }
+        composable(Screen.ListEscuelas) {
+            // Lógica para la lista de usuarios
+            ListEscuelas(navController)
         }
     }
 }

@@ -14,4 +14,5 @@ fun App(navController: NavHostController = rememberNavController()) {
 object Screen{
         val Users = "Users"
         val ListUser = "ListUser"
+        val ListEscuelas = "Escuelas"
 }

@@ -45,6 +45,7 @@ fun UserScreen(navController: NavController) {
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
         Text(
             text = "Añade tus Datos",
             color = Color.Blue,
