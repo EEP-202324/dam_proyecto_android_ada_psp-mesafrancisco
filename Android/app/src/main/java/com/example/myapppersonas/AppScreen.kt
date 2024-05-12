@@ -1,6 +1,7 @@
 package com.example.myapppersonas
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -19,7 +20,7 @@ fun AppScreen(
         startDestination = Screen.Users
     ) {
         composable(Screen.Users) {
-            UserScreen(navController )
+            UserScreen(navController, viewModel())
         }
         composable(Screen.ListUser) {
             // Lógica para la lista de usuarios

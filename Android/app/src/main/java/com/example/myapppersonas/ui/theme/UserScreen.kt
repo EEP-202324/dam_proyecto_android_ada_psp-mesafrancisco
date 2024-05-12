@@ -32,7 +32,7 @@ import com.example.myapppersonas.screens.PersonaViewModel
 
 
 @Composable
-fun UserScreen(navController: NavController): PersonaViewModel {
+fun UserScreen(navController: NavController, personaViewModel: PersonaViewModel) {
     var nombre by remember { mutableStateOf("") }
     var apellido by remember { mutableStateOf("") }
     var edad by remember { mutableStateOf("") }
@@ -84,6 +84,7 @@ fun UserScreen(navController: NavController): PersonaViewModel {
         ) {
             Button(
                 onClick = {
+                    personaViewModel.anadirPersonas(nombre, apellido, edad.toInt())
                     nombre = ""
                     apellido = ""
                     edad = ""
