@@ -9,12 +9,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapppersonas.model.Persona
 import com.example.myapppersonas.network.PersonaApi
+import com.example.myapppersonas.repository.PersonaRepository
 import kotlinx.coroutines.launch
 import java.io.IOException
 
 class PersonaViewModel : ViewModel() {
     sealed interface PersonaUiState {
-        data class Success(val persona: Unit) : PersonaUiState // TODO lista de personas
+        data class Success(val persona: Unit) : PersonaUiState
         object Error : PersonaUiState
 
         object Loading : PersonaUiState
@@ -30,18 +31,18 @@ class PersonaViewModel : ViewModel() {
         nombre : String, apellido : String, edad : Int
     ) {
         viewModelScope.launch {
-//            try {
-//                Log.i("MarsViewModel","Antes de la persona");
-//                val nuevaPersona = Persona(id = id, nombre = nombre, apellido = apellido, edad = edad)
-//                val personaAnadida = PersonaApi.retrofitService.addPersona()
-//                Log.i("MarsViewModel","Despues de la persona");
-//                personaUiState = PersonaUiState.Success(
-//                     //"Success: ${listResult.size} Mars photos retrieved"// TODO lista de personas
-//                )
-//            } catch (e: IOException) {
-//                personaUiState = PersonaUiState.Error
-//                Log.i("MarsViewModel", "Algo falló", e);
-//            }
+            try {
+                val nuevaPersona = Persona(0, nombre, apellido, edad)
+                val exito = PersonaRepository(PersonaApi.retrofitService).addPersona(nuevaPersona)
+                if (exito) {
+                    personaUiState = PersonaUiState.Success(Unit)
+                } else {
+                    personaUiState = PersonaUiState.Error
+                }
+            } catch (e: IOException) {
+                personaUiState = PersonaUiState.Error
+                Log.e("PersonaViewModel", "Error al añadir persona", e)
+            }
         }
     }
 }

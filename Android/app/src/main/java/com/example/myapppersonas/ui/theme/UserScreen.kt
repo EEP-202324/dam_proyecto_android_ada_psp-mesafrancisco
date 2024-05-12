@@ -27,10 +27,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.myapppersonas.model.Persona
 import com.example.myapppersonas.network.PersonaApi.retrofitService
+import com.example.myapppersonas.repository.PersonaRepository
+import com.example.myapppersonas.screens.PersonaViewModel
 
 
 @Composable
-fun UserScreen(navController: NavController) {
+fun UserScreen(navController: NavController): PersonaViewModel {
     var nombre by remember { mutableStateOf("") }
     var apellido by remember { mutableStateOf("") }
     var edad by remember { mutableStateOf("") }
@@ -82,13 +84,9 @@ fun UserScreen(navController: NavController) {
         ) {
             Button(
                 onClick = {
-                    val nuevaPersona = Persona(0 ,nombre, apellido, edad.toInt()) //Creo una nueva persona con los campos introducidos
-                 //   recuperarPersonas()  //Añadimos la persona nueva
                     nombre = ""
                     apellido = ""
                     edad = ""
-
-                    // Limpiar campos después de agregar persona
                 }
             ) {
                 Text("Agregar Persona")
@@ -109,6 +107,10 @@ fun UserScreen(navController: NavController) {
         }
     }
 }
+
+
+
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {

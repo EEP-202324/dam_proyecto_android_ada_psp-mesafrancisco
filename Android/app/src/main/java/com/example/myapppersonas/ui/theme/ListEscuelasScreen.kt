@@ -1,5 +1,6 @@
 package com.example.myapppersonas.ui.theme
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,7 +16,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -27,35 +27,37 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.myapppersonas.screens.ListaPersonaViewModel
+import com.example.myapppersonas.R
+import com.example.myapppersonas.screens.EscuelasViewModel
 
 @Composable
 fun ListEscuelas(navController: NavController, modifier: Modifier = Modifier) {
-    val listaPersonaViewModel: ListaPersonaViewModel = viewModel()
-    listaPersonaViewModel.recuperarPersonas()
-    val state = listaPersonaViewModel.personaUiState
+    val escuelasViewModel: EscuelasViewModel = viewModel()
+    escuelasViewModel.recuperarEscuelas()
+    val state = escuelasViewModel.personaUiState
     when (state) {
-        is ListaPersonaViewModel.PersonaUiState.Error -> {
+        is EscuelasViewModel.EscuelaUiState.Error -> {
             Text(text = "Error")
         }
-        is ListaPersonaViewModel.PersonaUiState.Loading -> {
+        is EscuelasViewModel.EscuelaUiState.Loading -> {
             Text(text = "CARGANDO")
         }
-        is ListaPersonaViewModel.PersonaUiState.Success -> {
-            val listaPersonas = state.personas
+        is EscuelasViewModel.EscuelaUiState.Success -> {
+            val listaPersonas = state.escuelas
             LazyColumn(modifier = modifier) {
                 items(listaPersonas) { p ->
                     EscuelaCard(
                         id = p.id,
-                        firstName = p.nombre,
-                        lastName = p.apellido,
-                        age = p.edad
+                        nombreEscuela = p.nombre,
+                        especialidad = p.especialidad,
+                        numeroDeCaseta = p.numeroDeCaseta
                     )
                 }
             }
@@ -80,39 +82,7 @@ fun ListEscuelas(navController: NavController, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun StandardFab3(navController: NavController, modifier: Modifier = Modifier) {
-    FloatingActionButton(
-        onClick = { navController.navigate(Screen.Users) },
-        modifier = modifier,
-        containerColor = MaterialTheme.colorScheme.primary
-    ) {
-        Row(modifier = Modifier.padding(10.dp)) {
-            Text(text = "Añadir Usuario")
-            Spacer(modifier = Modifier.height(8.dp))
-            Icon(
-                imageVector = Icons.Default.Add,
-                contentDescription = "Add"
-            )
-        }
-    }
-}
-
-
-@Composable
-fun StandardFab4(navController: NavController, modifier: Modifier = Modifier) {
-    FloatingActionButton(
-        onClick = { navController.navigate(Screen.ListUser) },
-        modifier = modifier,
-        containerColor = MaterialTheme.colorScheme.error
-
-    ) {
-        Icon(
-            imageVector = Icons.Default.ArrowBack,
-            contentDescription = "Volver")
-    }
-}
-@Composable
-fun EscuelaCard(id: Int, firstName: String, lastName: String, age: Int) {
+fun EscuelaCard(id: Int, nombreEscuela: String, especialidad: String, numeroDeCaseta: Int) {
     Surface(
         modifier = Modifier
             .height(210.dp)
@@ -142,7 +112,7 @@ fun EscuelaCard(id: Int, firstName: String, lastName: String, age: Int) {
                     Text(
                         modifier = Modifier
                             .padding(vertical = 4.dp, horizontal = 8.dp),
-                        text = "Ficha de Usuario $id",
+                        text = "Escuela numero $id",
                         fontSize = 12.sp,
                         style = MaterialTheme.typography.titleLarge
                     )
@@ -151,7 +121,7 @@ fun EscuelaCard(id: Int, firstName: String, lastName: String, age: Int) {
                 Spacer(modifier = Modifier.height(4.dp))
 
                 Text(
-                    text = "Nombre : $firstName $lastName",
+                    text = "Nombre : $nombreEscuela",
                     fontSize = 24.sp,
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.SemiBold
@@ -159,7 +129,7 @@ fun EscuelaCard(id: Int, firstName: String, lastName: String, age: Int) {
 
                 Spacer(modifier = Modifier.height(2.dp))
 
-                Text(text = "Usuario Aula")
+                Text(text = "Escuela Aula")
 
                 Spacer(modifier = Modifier.height(2.dp))
 
@@ -167,7 +137,7 @@ fun EscuelaCard(id: Int, firstName: String, lastName: String, age: Int) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Edad $age",
+                        text = "Numero de caseta: $numeroDeCaseta",
                         fontSize = 14.sp,
                         fontWeight = FontWeight.SemiBold,
                         style = MaterialTheme.typography.titleLarge
@@ -204,7 +174,38 @@ fun EscuelaCard(id: Int, firstName: String, lastName: String, age: Int) {
         }
     }
 }
+@Composable
+fun StandardFab3(navController: NavController, modifier: Modifier = Modifier) {
+    FloatingActionButton(
+        onClick = { navController.navigate(Screen.Users) },
+        modifier = modifier,
+        containerColor = MaterialTheme.colorScheme.primary
+    ) {
+        Row(modifier = Modifier.padding(10.dp)) {
+            Text(text = "Añadir Usuario")
+            Spacer(modifier = Modifier.height(8.dp))
+            Icon(
+                imageVector = Icons.Default.Add,
+                contentDescription = "Add"
+            )
+        }
+    }
+}
 
+
+@Composable
+fun StandardFab4(navController: NavController, modifier: Modifier = Modifier) {
+    FloatingActionButton(
+        onClick = { navController.navigate(Screen.ListUser) },
+        modifier = modifier,
+        containerColor = MaterialTheme.colorScheme.error
+
+    ) {
+        Icon(
+            imageVector = Icons.Default.ArrowBack,
+            contentDescription = "Volver")
+    }
+}
 @Preview(showBackground = true)
 @Composable
 fun prew2() {
