@@ -1,6 +1,4 @@
 package com.example.myapppersonas.ui.theme
-
-import androidx.compose.foundation.background
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.*
@@ -9,14 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -55,7 +46,7 @@ fun ListUser(navController: NavController, modifier: Modifier = Modifier) {
                         id = p.id,
                         firstName = p.nombre,
                         lastName = p.apellido,
-                        age = p.edad
+                        age = p.edad,
                     )
                 }
             }
@@ -63,7 +54,7 @@ fun ListUser(navController: NavController, modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxSize(),
-                contentAlignment = Alignment.BottomEnd
+                contentAlignment = Alignment.BottomStart
             ) {
                 StandardFab(navController = navController)
             }
@@ -71,7 +62,7 @@ fun ListUser(navController: NavController, modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxSize(),
-                contentAlignment = Alignment.BottomStart
+                contentAlignment = Alignment.BottomEnd
             ) {
                 StandardFab2(navController)
             }
@@ -183,7 +174,6 @@ fun UserProfileCard(id: Int, firstName: String, lastName: String, age: Int) {
 
                 Row (){
                     OutlinedButton(
-
                         shape = RoundedCornerShape(8.dp),
                         colors = ButtonDefaults.buttonColors(
                             contentColor = Color.Blue,

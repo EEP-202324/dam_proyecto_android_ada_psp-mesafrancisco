@@ -84,7 +84,9 @@ fun UserScreen(navController: NavController, personaViewModel: PersonaViewModel)
         ) {
             Button(
                 onClick = {
-                    personaViewModel.anadirPersonas(nombre, apellido, edad.toInt())
+                    if(nombre != "" && apellido !="" && edad !=""){
+                        personaViewModel.anadirPersonas(nombre, apellido, edad.toInt())
+                    }
                     nombre = ""
                     apellido = ""
                     edad = ""
@@ -108,10 +110,6 @@ fun UserScreen(navController: NavController, personaViewModel: PersonaViewModel)
         }
     }
 }
-
-
-
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {

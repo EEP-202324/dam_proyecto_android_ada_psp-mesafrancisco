@@ -23,9 +23,9 @@ class PersonaViewModel : ViewModel() {
     var personaUiState: PersonaUiState by mutableStateOf(PersonaUiState.Loading)
         private set
 
-    init {
-        anadirPersonas(nombre = "String", apellido = "String", edad = 1)
-    }
+//    init {
+//        anadirPersonas(nombre = "String", apellido = "String", edad = 1)
+//    }
 
     fun anadirPersonas(
         nombre : String, apellido : String, edad : Int
