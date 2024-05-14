@@ -28,7 +28,7 @@ interface PersonaApiService {
     suspend fun updatePersona(@Path("id") id: Long, @Body persona: Persona): Persona
 
     @DELETE("personas/{id}")
-    suspend fun deletePersona(@Path("id") id: Long): Response<Void>
+    suspend fun deletePersona(@Path("id") id: Int): Response<Void>
 
     @POST("personas")
     suspend fun addPersona(@Body persona: Persona): Response<Void>

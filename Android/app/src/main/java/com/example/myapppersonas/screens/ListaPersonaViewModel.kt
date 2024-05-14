@@ -39,12 +39,13 @@ class ListaPersonaViewModel : ViewModel() {
             }
         }
     }
-    fun borrarPersona(id: Long) {
+    fun borrarPersona(id: Int) {
         viewModelScope.launch {
             try {
               val respuesta = PersonaApi.retrofitService.deletePersona(id)
                 if (respuesta.isSuccessful){
                     Log.i("borrarPersona", "Persona borrada correctamente")
+                    recuperarPersonas()
                 }
             } catch (e: IOException) {
                 personaUiState = PersonaUiState.Error

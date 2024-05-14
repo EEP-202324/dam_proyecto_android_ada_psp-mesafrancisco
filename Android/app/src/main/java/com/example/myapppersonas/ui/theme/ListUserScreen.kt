@@ -120,7 +120,7 @@ fun StandardFab2(navController: NavController, modifier: Modifier = Modifier) {
 }
 @Composable
 fun UserProfileCard(id: Int, firstName: String, lastName: String, age: Int) {
-    
+    var viewModel: ListaPersonaViewModel = viewModel()
     Surface(
         modifier = Modifier
             .height(210.dp)
@@ -192,7 +192,7 @@ fun UserProfileCard(id: Int, firstName: String, lastName: String, age: Int) {
                             containerColor = Color.Transparent
                         ),
                         onClick = {
-                            ListaPersonaViewModel.
+                            viewModel.borrarPersona(id)
                         }
                     ) {
                         Text(
