@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapppersonas.model.Escuela
 import com.example.myapppersonas.network.EscuelaApi
-import com.example.myapppersonas.network.PersonaApi
 import kotlinx.coroutines.launch
 import java.io.IOException
 

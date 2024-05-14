@@ -1,7 +1,6 @@
 package com.example.myapppersonas.network
 
 import com.example.myapppersonas.model.Escuela
-import com.example.myapppersonas.model.Persona
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

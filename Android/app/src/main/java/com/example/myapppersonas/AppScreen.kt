@@ -9,8 +9,6 @@ import com.example.myapppersonas.ui.theme.ListEscuelas
 import com.example.myapppersonas.ui.theme.ListUser
 import com.example.myapppersonas.ui.theme.Screen
 import com.example.myapppersonas.ui.theme.UserScreen
-
-
 @Composable
 fun AppScreen(
     navController: NavHostController
