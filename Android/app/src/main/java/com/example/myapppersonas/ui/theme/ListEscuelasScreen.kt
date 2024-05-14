@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -42,40 +43,48 @@ fun ListEscuelas(navController: NavController, modifier: Modifier = Modifier) {
     val escuelasViewModel: EscuelasViewModel = viewModel()
     escuelasViewModel.recuperarEscuelas()
     val state = escuelasViewModel.personaUiState
-    when (state) {
-        is EscuelasViewModel.EscuelaUiState.Error -> {
-            Text(text = "Error")
-        }
-        is EscuelasViewModel.EscuelaUiState.Loading -> {
-            Text(text = "CARGANDO")
-        }
-        is EscuelasViewModel.EscuelaUiState.Success -> {
-            val listaPersonas = state.escuelas
-            LazyColumn(modifier = modifier) {
-                items(listaPersonas) { p ->
-                    EscuelaCard(
-                        id = p.id,
-                        nombreEscuela = p.nombre,
-                        especialidad = p.especialidad,
-                        numeroDeCaseta = p.numeroDeCaseta
-                    )
+    Box(modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(id = R.drawable.uni1__3_),
+            contentDescription = "Background Image",
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.FillBounds
+        )
+        when (state) {
+            is EscuelasViewModel.EscuelaUiState.Error -> {
+                Text(text = "Error")
+            }
+            is EscuelasViewModel.EscuelaUiState.Loading -> {
+                Text(text = "CARGANDO")
+            }
+            is EscuelasViewModel.EscuelaUiState.Success -> {
+                val listaPersonas = state.escuelas
+                LazyColumn(modifier = modifier) {
+                    items(listaPersonas) { p ->
+                        EscuelaCard(
+                            id = p.id,
+                            nombreEscuela = p.nombre,
+                            especialidad = p.especialidad,
+                            numeroDeCaseta = p.numeroDeCaseta
+                        )
+                    }
                 }
-            }
-            Box(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxSize(),
-                contentAlignment = Alignment.BottomEnd
-            ) {
-                StandardFab3(navController = navController)
-            }
-            Box(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxSize(),
-                contentAlignment = Alignment.BottomStart
-            ) {
-                StandardFab4(navController)
+                Box(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.BottomEnd
+                ) {
+                    StandardFab3(navController = navController)
+                }
+                Box(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.BottomStart
+                ) {
+                    StandardFab4(navController)
+                }
             }
         }
     }

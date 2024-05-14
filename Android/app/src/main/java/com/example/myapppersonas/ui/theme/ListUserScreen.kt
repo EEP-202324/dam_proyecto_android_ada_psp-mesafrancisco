@@ -1,4 +1,5 @@
 package com.example.myapppersonas.ui.theme
+import androidx.compose.foundation.Image
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.*
@@ -17,6 +18,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,51 +28,59 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.myapppersonas.screens.ListaPersonaViewModel
 
+import com.example.myapppersonas.R
 
 @Composable
 fun ListUser(navController: NavController, modifier: Modifier = Modifier) {
     val listaPersonaViewModel: ListaPersonaViewModel = viewModel()
     listaPersonaViewModel.recuperarPersonas()
     val state = listaPersonaViewModel.personaUiState
-    when (state) {
-        is ListaPersonaViewModel.PersonaUiState.Error -> {
-            Text(text = "Error")
-        }
-        is ListaPersonaViewModel.PersonaUiState.Loading -> {
-            Text(text = "CARGANDO")
-        }
-        is ListaPersonaViewModel.PersonaUiState.Success -> {
-            val listaPersonas = state.personas
-            LazyColumn(modifier = modifier) {
-                items(listaPersonas) { p ->
-                    UserProfileCard(
-                        id = p.id,
-                        firstName = p.nombre,
-                        lastName = p.apellido,
-                        age = p.edad,
-                    )
+    Box(modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(id = R.drawable.fondi),
+            contentDescription = "Imagen de fondo",
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.FillBounds
+        )
+        when (state) {
+            is ListaPersonaViewModel.PersonaUiState.Error -> {
+                Text(text = "Error")
+            }
+            is ListaPersonaViewModel.PersonaUiState.Loading -> {
+                Text(text = "CARGANDO")
+            }
+            is ListaPersonaViewModel.PersonaUiState.Success -> {
+                val listaPersonas = state.personas
+                LazyColumn(modifier = modifier) {
+                    items(listaPersonas) { p ->
+                        UserProfileCard(
+                            id = p.id,
+                            firstName = p.nombre,
+                            lastName = p.apellido,
+                            age = p.edad,
+                        )
+                    }
                 }
-            }
-            Box(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxSize(),
-                contentAlignment = Alignment.BottomStart
-            ) {
-                StandardFab(navController = navController)
-            }
-            Box(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxSize(),
-                contentAlignment = Alignment.BottomEnd
-            ) {
-                StandardFab2(navController)
+                Box(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.BottomStart
+                ) {
+                    StandardFab(navController = navController)
+                }
+                Box(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.BottomEnd
+                ) {
+                    StandardFab2(navController)
+                }
             }
         }
     }
 }
-
 @Composable
 fun StandardFab(navController: NavController, modifier: Modifier = Modifier) {
     FloatingActionButton(
@@ -109,6 +120,7 @@ fun StandardFab2(navController: NavController, modifier: Modifier = Modifier) {
 }
 @Composable
 fun UserProfileCard(id: Int, firstName: String, lastName: String, age: Int) {
+    
     Surface(
         modifier = Modifier
             .height(210.dp)
@@ -179,7 +191,9 @@ fun UserProfileCard(id: Int, firstName: String, lastName: String, age: Int) {
                             contentColor = Color.Blue,
                             containerColor = Color.Transparent
                         ),
-                        onClick = { /*TODO*/ }
+                        onClick = {
+                            ListaPersonaViewModel.
+                        }
                     ) {
                         Text(
                             text = "Borrar Usuario",

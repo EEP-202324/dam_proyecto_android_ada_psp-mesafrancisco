@@ -8,4 +8,8 @@ class PersonaRepository(private val personaService: PersonaApiService) {
         val response = personaService.addPersona(persona)
         return response.isSuccessful
     }
+    suspend fun borrarPersona(id: Long): Boolean {
+        val response = personaService.deletePersona(id)
+        return response.isSuccessful
+    }
 }
