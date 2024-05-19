@@ -154,23 +154,7 @@ fun EscuelaCard(id: Int, nombreEscuela: String, especialidad: String, numeroDeCa
 
                 }
 
-                Spacer(modifier = Modifier.height(8.dp))
 
-                OutlinedButton(
-                    shape = RoundedCornerShape(8.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        contentColor = Color.Blue,
-                        containerColor = Color.White
-                    ),
-                    onClick = { /*TODO*/ }
-                ) {
-                    Text(
-                        text = "Borrar Usuario",
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        style = MaterialTheme.typography.titleLarge
-                    )
-                }
                 Box(
                     modifier = Modifier
                         .padding(16.dp)

@@ -39,6 +39,7 @@ class ListaPersonaViewModel : ViewModel() {
             }
         }
     }
+
     fun borrarPersona(id: Int) {
         viewModelScope.launch {
             try {
