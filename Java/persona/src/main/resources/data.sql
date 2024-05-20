@@ -1,0 +1,1 @@
+INSERT INTO PERSONA(ID, NOMBRE, APELLIDO, EDAD) VALUES (1, 'francisco', 'mesa', 29);
